@@ -1,0 +1,43 @@
+name: Production Django deploy oleo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: GIT pulling from github repository
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        source: "."
+        target: "/home/backend/oleo"
+
+    - name: Command using from script
+      uses: appleboy/ssh-action@master
+      env:
+        DJANGO_SETTINGS_MODULE: "oleo.production"
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        envs: DJANGO_SETTINGS_MODULE
+        script_stop: true
+        script: |
+          git --work-tree=/home/backend/oleo --git-dir=/home/backend/oleo/.git clean -f .
+          /home/backend/oleo/venv/bin/pip install -r /home/backend/oleo/production.txt
+          /home/backend/oleo/venv/bin/python /home/backend/oleo/manage_prod.py migrate
+          systemctl restart oleo.service
+          sh /home/devops/oleo_back.sh "${{ github.event.head_commit.message }}"

@@ -242,7 +242,7 @@ class LangsSerializer(serializers.ModelSerializer):
 class PartnersSerializer(serializers.ModelSerializer):
     name = JsonFieldSerializer()
     deckription = JsonFieldSerializer()
-    image = ThumbnailSerializer(alias='avatar')
+    image = ThumbnailSerializer(alias='product_img')
 
     class Meta:
         model = Partners

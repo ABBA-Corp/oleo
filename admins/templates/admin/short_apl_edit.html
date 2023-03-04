@@ -107,6 +107,21 @@
                 <div class="invalid-feedback" style="display: block;">{{ form.errors.status }}</div>
             </div>
 
+            <div class="form-group">
+                <!-- Label -->
+                <label class="form-label mb-1">
+                    Текст
+                </label>
+                <br>
+                <!-- Textarea -->
+                <textarea class="editor" name="comment" placeholder="Text">
+                    {% if object and object.comment %} 
+                        {{ object.comment }} 
+                    {% elif request_post and request_post|get_item:'comment' %}
+                        {{ request_post|get_item:'comment' }}
+                    {% endif %}</textarea>
+            </div>
+
             {% if object.product %}
             <div class="form-group">
                 <!-- Label  -->

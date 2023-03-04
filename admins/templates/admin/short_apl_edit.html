@@ -12,9 +12,9 @@
 
 {% block nav_ol %}
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admins:home' %}">Главная</a></li>
     <li class="breadcrumb-item ">
-        <a href="{% url 'short_aplic_list' %}">Заявки c сайта</a>
+        <a href="{% url 'admins:short_aplic_list' %}">Заявки c сайта</a>
     </li>
     <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
         Создать
@@ -131,7 +131,7 @@
                 <br>
                 <!-- Input -->
                 <div class="list-group list-group-flush list-group-focus product-card">
-                    <a class="list-group-item" href="{%  url 'products_edit' object.product.id %}">
+                    <a class="list-group-item" href="{% url 'admins:products_edit' object.product.id %}">
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <!-- Avatar -->

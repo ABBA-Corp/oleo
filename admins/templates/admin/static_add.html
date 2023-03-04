@@ -11,7 +11,7 @@
 
 {% block nav_ol %}
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admins:home' %}">Главная</a></li>
     <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
         Общие данные
     </li>
@@ -177,7 +177,7 @@
                         <a class="text-danger d-block col-6" style="cursor: pointer;"
                             onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_sec')}"
                             data-dz-remove>Удалить</a>
-                        <div action="{% url 'del_static_image' %}" id="delete-form-logo_sec" method="post">
+                        <div action="{% url 'admins:del_static_image' %}" id="delete-form-logo_sec" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="key" value="cotalog">
                             <input type="hidden" name="url" value="{{ request.get_full_path }}">
@@ -272,7 +272,7 @@
                                         <a class="dz-remove" data-file="{{ img.id }}"
                                             onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_first')}"
                                             data-dz-remove>Удалить</a>
-                                        <div action="{% url 'del_static_image' %}" id="delete-form-logo_first" method="post">
+                                        <div action="{% url 'admins:del_static_image' %}" id="delete-form-logo_first" method="post">
                                             {% csrf_token %}
                                             <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                             <input type="hidden" name="key" value="logo1">
@@ -312,7 +312,7 @@
                                             <a class="dz-remove" data-file="{{ img.id }}"
                                                 onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_sec')}"
                                                 data-dz-remove>Удалить</a>
-                                            <div action="{% url 'del_static_image' %}" id="delete-form-logo_sec" method="post">
+                                            <div action="{% url 'admins:del_static_image' %}" id="delete-form-logo_sec" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                                 <input type="hidden" name="key" value="logo2">

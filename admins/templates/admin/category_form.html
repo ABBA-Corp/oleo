@@ -12,9 +12,9 @@
 
 {% block nav_ol %}
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admins:home' %}">Главная</a></li>
     <li class="breadcrumb-item ">
-        <a href="{% url 'category_list' %}">Категории</a>
+        <a href="{% url 'admins:category_list' %}">Категории</a>
     </li>
     <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
         Создать
@@ -111,7 +111,7 @@
                         <a class="d-block col-6" href="{{ object.cotalog.url }}">Скачать</a>
                         <a class="text-danger d-block col-6" style="cursor: pointer;" onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_sec')}"
                             data-dz-remove>Удалить</a>
-                        <div action="{% url 'del_ctg_file' %}" id="delete-form-logo_sec" method="post">
+                        <div action="{% url 'admins:del_ctg_file' %}" id="delete-form-logo_sec" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="key" value="cotalog">
                             <input type="hidden" name="obj_id" value="{{ object.id }}">
@@ -162,7 +162,7 @@
                                             <a class="dz-remove" data-file="{{ img.id }}"
                                                 onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_first')}"
                                                 data-dz-remove>Удалить</a>
-                                            <div action="{% url 'del_ctg_file' %}" id="delete-form-logo_first" method="post">
+                                            <div action="{% url 'admins:del_ctg_file' %}" id="delete-form-logo_first" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="obj_id" value="{{ object.id }}">
                                                 <input type="hidden" name="key" value="image">
@@ -181,7 +181,7 @@
                                             <a class="dz-remove" data-file="{{ img }}"
                                                 onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form{{ img.id }}')}"
                                                 data-dz-remove>Удалить</a>
-                                            <div action="{% url 'del-img' %}" id="delete-form{{ img.id }}" method="post">
+                                            <div action="{% url 'admins:del-img' %}" id="delete-form{{ img.id }}" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                                 <input type="hidden" name="key" value="{{ dropzone_key }}_image">
@@ -235,7 +235,7 @@
                                             <a class="dz-remove"
                                                 onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_sec')}"
                                                 data-dz-remove>Удалить</a>
-                                            <div action="{% url 'del_ctg_file' %}" id="delete-form-logo_sec" method="post">
+                                            <div action="{% url 'admins:del_ctg_file' %}" id="delete-form-logo_sec" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="key" value="icon">
                                                 <input type="hidden" name="obj_id" value="{{ object.id }}">
@@ -254,7 +254,7 @@
                                         <a class="dz-remove" data-file="{{ img }}"
                                             onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form{{ img.id }}')}"
                                             data-dz-remove>Удалить</a>
-                                        <div action="{% url 'del-img' %}" id="delete-form{{ img.id }}" method="post">
+                                        <div action="{% url 'admins:del-img' %}" id="delete-form{{ img.id }}" method="post">
                                             {% csrf_token %}
                                             <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                             <input type="hidden" name="key" value="{{ dropzone_key }}_icon">

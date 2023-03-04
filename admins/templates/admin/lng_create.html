@@ -11,9 +11,9 @@
 
 {% block nav_ol %}
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'admins:home' %}">Главная</a></li>
         <li class="breadcrumb-item ">
-            <a href="{% url 'langs_list' %}">Языки</a>
+            <a href="{% url 'admins:langs_list' %}">Языки</a>
         </li>
         <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
             Создать
@@ -103,7 +103,7 @@
                                     <a class="dz-remove" data-file="{{ img.id }}"
                                         onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form{{ img.id }}')}"
                                         data-dz-remove>Удалить</a>
-                                    <div action="{% url 'lang_icon_del' %}" id="delete-form{{ img.id }}" method="post">
+                                    <div action="{% url 'admins:lang_icon_del' %}" id="delete-form{{ img.id }}" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                         <input type="hidden" name="item_id" value="{{ object.id }}">
@@ -122,7 +122,7 @@
                                 <a class="dz-remove" data-file="{{ img }}"
                                     onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form{{ img.id }}')}"
                                     data-dz-remove>Удалить</a>
-                                <div action="{% url 'del-img' %}" id="delete-form{{ img.id }}" method="post">
+                                <div action="{% url 'admins:del-img' %}" id="delete-form{{ img.id }}" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" name="url" value="{{ request.get_full_path }}">
                                     <input type="hidden" name="key" value="{{ dropzone_key }}">

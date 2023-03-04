@@ -364,7 +364,7 @@ def delete_image(request):
 class ArticleCreateView(BasedCreateView):
     model = Articles
     template_name = 'admin/new_article.html'
-    success_url = 'articles_list'
+    success_url = 'admins:articles_list'
     related_model = ArticleCategories
     image_field = 'image'
     meta = True
@@ -402,7 +402,7 @@ class ArticlesList(BasedListView):
 class ArticleUpdate(BasedUpdateView):
     model = Articles
     template_name = 'admin/new_article.html'
-    success_url = 'articles_list'
+    success_url = 'admins:articles_list'
     fields = '__all__'
     meta = True
     related_model = ArticleCategories
@@ -454,7 +454,7 @@ class LngCreateView(CreateView):
     def form_valid(self, form):
         lang_save(form, self.request)
 
-        return redirect('langs_list')
+        return redirect('admins:langs_list')
 
     def get_context_data(self, **kwargs):
         context = super(LngCreateView, self).get_context_data(**kwargs)
@@ -484,7 +484,7 @@ class LangsUpdate(UpdateView):
     def form_valid(self, form):
         lang_save(form, self.request)
 
-        return redirect('langs_list')
+        return redirect('admins:langs_list')
 
 
 # langs delete
@@ -506,7 +506,7 @@ class StaticUpdate(BasedUpdateView):
     model = StaticInformation
     fields = "__all__"
     template_name = 'admin/static_add.html'
-    success_url = 'static_info'
+    success_url = 'admins:static_info'
 
     def get_object(self):
         try:
@@ -745,7 +745,7 @@ class TranslationGroupUdpate(UpdateView):
             except:
                 return render(request, template_name=self.template_name, context={'key_errors': {str(i): 'Key is alredy in use'}, 'new_objects': objects, 'langs': langs, 'len': items_count})
 
-        return redirect('transl_group_detail', pk=self.get_object().id)
+        return redirect('admins:transl_group_detail', pk=self.get_object().id)
 
 
 # article ctg list
@@ -760,7 +760,7 @@ class AddArticleCtg(BasedCreateView):
     model = ArticleCategories
     template_name = 'admin/article_ctg_form.html'
     fields = '__all__'
-    success_url = 'article_ctg_list'
+    success_url = 'admins:article_ctg_list'
     related_model = ArticleCategories
     image_field = 'image'
 
@@ -781,7 +781,7 @@ class ArticleCtgEdit(BasedUpdateView):
     model = ArticleCategories
     fields = "__all__"
     template_name = 'admin/article_ctg_form.html'
-    success_url = 'article_ctg_list'
+    success_url = 'admins:article_ctg_list'
     image_field = 'image'
 
     def get_request_data(self):
@@ -834,7 +834,7 @@ class AdminCreate(CreateView):
 
         new_user.save()
 
-        return redirect('admin_list')
+        return redirect('admins:admin_list')
 
 
 # admin udate
@@ -870,7 +870,7 @@ class AdminUpdate(UpdateView):
 
         user.save()
 
-        return redirect('admin_list')
+        return redirect('admins:admin_list')
 
 
 # del article image
@@ -913,7 +913,7 @@ class ShortApplicationUpdate(UpdateView):
 def logout_view(request):
     logout(request)
 
-    return redirect('login_admin')
+    return redirect('admins:login_admin')
 
 
 # partners
@@ -929,7 +929,7 @@ class PartnersCreate(BasedCreateView):
     fields = "__all__"
     template_name = 'admin/partners_form.html'
     image_field = 'image'
-    success_url = 'partners_list'
+    success_url = 'admins:partners_list'
 
 
 # pertners eidt
@@ -937,7 +937,7 @@ class PartnersEdit(BasedUpdateView):
     model = Partners
     fields = "__all__"
     template_name = 'admin/partners_form.html'
-    success_url = 'partners_list'
+    success_url = 'admins:partners_list'
     image_field = 'image'
 
 
@@ -954,7 +954,7 @@ class CategoryCreate(BasedCreateView):
     model = Category
     fields = '__all__'
     template_name = 'admin/category_form.html'
-    success_url = 'category_list'
+    success_url = 'admins:category_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1008,7 +1008,7 @@ class CategoryEdit(BasedUpdateView):
     model = Category
     fields = '__all__'
     template_name = 'admin/category_form.html'
-    success_url = 'category_list'
+    success_url = 'admins:category_list'
 
     def get_request_data(self):
         data_dict = super().get_request_data()
@@ -1091,7 +1091,7 @@ class ProductsCreate(BasedCreateView):
     template_name = 'admin/products_form.html'
     related_model = Category
     image_field = 'image'
-    success_url = 'products_list'
+    success_url = 'admins:products_list'
     meta = True
     
     def get_request_data(self):
@@ -1114,7 +1114,7 @@ class ProductEdit(BasedUpdateView):
     template_name = 'admin/products_form.html'
     related_model = Category
     image_field = 'image'
-    success_url = 'products_list'
+    success_url = 'admins:products_list'
     meta = True
 
     def get_request_data(self):
@@ -1140,7 +1140,7 @@ class FAQcreate(BasedCreateView):
     model = FAQ
     fields = '__all__'
     template_name = 'admin/faq_form.html'
-    success_url = 'faq_list'
+    success_url = 'admins:faq_list'
 
 
 # faq update
@@ -1148,7 +1148,7 @@ class FAQupdate(BasedUpdateView):
     model = FAQ
     fields = '__all__'
     template_name = 'admin/faq_form.html'
-    success_url = 'faq_list'
+    success_url = 'admins:faq_list'
 
 
 # Recipe list
@@ -1162,7 +1162,7 @@ class RecipeList(BasedListView):
 class RecipeCreate(BasedCreateView):
     model = Recipe
     template_name = 'admin/reciepe_form.html'
-    success_url = 'recipe_list'
+    success_url = 'admins:recipe_list'
     image_field = 'image'
 
 
@@ -1171,7 +1171,7 @@ class RecipeEdit(BasedUpdateView):
     model = Recipe
     template_name = 'admin/reciepe_form.html'
     image_field = 'image'
-    success_url = 'recipe_list'
+    success_url = 'admins:recipe_list'
 
 
 # delete recipe video
@@ -1232,11 +1232,11 @@ class ActivityList(BasedListView):
 class ActivityCreate(BasedCreateView):
     model = FieldOfActivity
     template_name = 'admin/activity_form.html'
-    success_url = 'act_list'
+    success_url = 'admins:act_list'
 
 
 # activity update
 class ActivityUpdate(BasedUpdateView):
     model = FieldOfActivity
     template_name = 'admin/activity_form.html'
-    success_url = 'act_list'
+    success_url = 'admins:act_list'

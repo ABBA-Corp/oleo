@@ -17,7 +17,7 @@ def image_thumb(image, **kwargs):
     size = alias.get('size')[0]
     url = None
 
-    if image:
+    if image and default_storage.exists(image.path):
         orig_url = image.path.split('.')
         thb_url = '.'.join(orig_url) + f'.{size}x{size}_q85.{orig_url[-1]}'
         if default_storage.exists(thb_url):
@@ -25,6 +25,8 @@ def image_thumb(image, **kwargs):
             url = '.'.join(last_url) + f'.{size}x{size}_q85.{last_url[-1]}'
         else:
             url = get_thumbnailer(image)[alias_key].url
+    elif not default_storage.exists(image.path):
+        url = '/static/src/img/default.png'
 
     if url == '' or url is None:
         return None

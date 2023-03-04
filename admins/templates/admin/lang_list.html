@@ -22,7 +22,7 @@
 
 {% block nav_ol %}
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admins:home' %}">Главная</a></li>
     <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
         Языки
     </li>
@@ -87,11 +87,11 @@
                                 {% for lang, i in langs.pairs %}
                                     <tr>
                                         <td>
-                                            <a class="item-title" href="{% url 'lang_update' lang.id %}">{{ i }}</a>
+                                            <a class="item-title" href="{% url 'admins:lang_update' lang.id %}">{{ i }}</a>
                                         </td>
                                         <td>
                                             <!-- Avatar -->
-                                            <a class="item-name text-reset" href="{% url 'lang_update' lang.id %}">{{ lang.name }}</a>
+                                            <a class="item-name text-reset" href="{% url 'admins:lang_update' lang.id %}">{{ lang.name }}</a>
                                         </td>
                                         <td>
                                             <!-- Text -->
@@ -121,10 +121,10 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-end">
-                                                <a href="{% url 'lang_update' lang.id %}" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                <a href="{% url 'admins:lang_update' lang.id %}" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
                                                 <a class="btn btn-sm btn-danger ms-3"
                                                     onclick="var result = confirm('Want to delete?');if (result){event.preventDefault();document.getElementById('delete-form{{ lang.id }}').submit();}"><i class="fe fe-trash"></i></a>
-                                                <form action="{% url 'lang_del' %}" id="delete-form{{ lang.id }}" method="POST" style="display: none;">
+                                                <form action="{% url 'admins:lang_del' %}" id="delete-form{{ lang.id }}" method="POST" style="display: none;">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="id" value="{{ lang.id }}">
                                                     <input type="hidden" name="url" value="{{ request.get_full_path }}">

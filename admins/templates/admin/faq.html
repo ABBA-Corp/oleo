@@ -102,7 +102,7 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="{% url 'faq_edit' obj.id %}" class="btn btn-sm btn-info"><i
+                            <a href="{% url 'admins:faq_edit' obj.id %}" class="btn btn-sm btn-info"><i
                                     class="fe fe-edit-2"></i></a>
                             <a class="btn btn-sm btn-danger ms-3"
                                 onclick="var result = confirm('Want to delete?');if (result){form_submit_in_table('delete-form{{ obj.id }}')}"><i

@@ -107,7 +107,7 @@
                             <a class="btn btn-sm btn-danger ms-3"
                                 onclick="var result = confirm('Want to delete?');if (result){form_submit_in_table('delete-form{{ obj.id }}')}"><i
                                     class="fe fe-trash"></i></a>
-                            <div action="{% url 'delete' %}" id="delete-form{{ obj.id }}" method="POST"
+                            <div action="{% url 'admins:delete' %}" id="delete-form{{ obj.id }}" method="POST"
                                 style="display: none;">
                                 {% csrf_token %}
                                 <input type="hidden" name="item_id" value="{{ obj.id }}">

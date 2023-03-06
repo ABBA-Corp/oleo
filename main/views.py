@@ -18,7 +18,7 @@ class BasePagination(pagination.PageNumberPagination):
 
 # articles list
 class ArticlesList(generics.ListAPIView):
-    queryset = Articles.objects.filter(active=True)
+    queryset = Articles.objects.filter(active=True).order_by('-created_date')
     serializer_class = ArticleSerializer
     pagination_class = BasePagination
 

@@ -10,7 +10,7 @@ from .settings import *  # noqa
 import environ
 env = environ.Env()
 env.read_env(str(BASE_DIR / ".env"))
-DEBUG = True
+DEBUG = False
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -65,7 +65,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 
 # STATIC
 # ------------------------
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = env("DJANGO_STATIC")
 # MEDIA
 # ------------------------------------------------------------------------------

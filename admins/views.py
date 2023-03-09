@@ -405,6 +405,7 @@ class ArticleUpdate(BasedUpdateView):
     success_url = 'admins:articles_list'
     fields = '__all__'
     meta = True
+    image_field = 'image'
     related_model = ArticleCategories
 
     def form_valid(self, form):

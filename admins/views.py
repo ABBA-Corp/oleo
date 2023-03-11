@@ -15,6 +15,7 @@ from .utils import *
 from .serializers import TranslationSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from django.conf import settings
 # Create your views here.
 
 
@@ -526,6 +527,12 @@ class StaticUpdate(BasedUpdateView):
             data_dict['cotalog'] = cotalog
 
         return data_dict
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['madia'] = settings.MEDIA_ROOT
+
+        return context
 
 
 # translations list

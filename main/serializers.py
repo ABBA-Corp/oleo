@@ -145,7 +145,7 @@ class ProductsSerializer(serializers.ModelSerializer):
     category = CategorySimpleSerializer()
     description = JsonFieldSerializer()
     meta = MetaFieldSerializer()
-    image = ThumbnailSerializer(alias='prod_photo')
+    image = ThumbnailSerializer(alias='biiiig')
 
     class Meta:
         model = Products

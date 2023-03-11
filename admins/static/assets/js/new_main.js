@@ -70,6 +70,7 @@ $('.dropzone').each((i, e) => {
     var myDropzone = new Dropzone(e, {
         url: $(e).attr("data-url"),
         parallelUploads: 1,
+        acceptedFiles: 'image/*',
         maxFiles: $('.dropzone').attr('data-max'),
         params: {
             "csrfmiddlewaretoken": document.querySelector('input[name="csrfmiddlewaretoken"]').value,

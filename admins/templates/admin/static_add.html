@@ -173,7 +173,7 @@
                     <input type="file" name="cotalog" class="form-control" id="customFileUploadMultiple">
                     {% if object and object.cotalog %}
                     <div class="row">
-                        <a class="d-block col-6" href="{{ madia }}{{ object.cotalog.url }}">Скачать</a>
+                        <a class="d-block col-6" href="{{ object.cotalog.url }}" download>Скачать</a>
                         <a class="text-danger d-block col-6" style="cursor: pointer;"
                             onclick="var result = confirm('Want to delete?');if (result){submit_form('delete-form-logo_sec')}"
                             data-dz-remove>Удалить</a>

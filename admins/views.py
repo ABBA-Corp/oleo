@@ -355,6 +355,8 @@ def delete_image(request):
         if request.session.get(key):
             for it in request.session[key]:
                 if it['name'] == file:
+                    if default_storage.exists(it['name']):
+                        default_storage.delete(it['name'])
                     request.session[key].remove(it)
                     request.session.modified = True
 

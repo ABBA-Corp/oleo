@@ -528,12 +528,6 @@ class StaticUpdate(BasedUpdateView):
 
         return data_dict
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['madia'] = settings.MEDIA_ROOT
-
-        return context
-
 
 # translations list
 class TranslationList(ListView):

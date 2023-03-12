@@ -72,7 +72,7 @@
                         <a class="list-sort text-muted" data-sort="item-name">Название</a>
                     </th>
                     <th>
-                        <a class="list-sort text-muted" data-sort="item-name">Описание</a>
+                        <a class="list-sort text-muted" data-sort="item-name">Статус</a>
                     </th>
                     <th>
                         <a class="list-sort text-muted" data-sort="item-name">Иконка</a>
@@ -99,9 +99,11 @@
                         </p>
                     </td>
                     <td>
-                        <p class="item-text text-reset">
-                            {{ obj.deckription|get_item:lang.code|cut_text }}
-                        </p>
+                        {% if obj.active %}
+                        <span class="badge bg-success-soft">Active</span>
+                        {% else %}
+                        <span class="badge bg-danger-soft">Inactive</span>
+                        {% endif %}
                     </td>
                     <td>
                         <div class="avatar align-middle me-2">

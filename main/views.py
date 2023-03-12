@@ -67,14 +67,14 @@ class PartnersList(generics.ListAPIView):
 
 # category list
 class CategoryList(generics.ListAPIView):
-    queryset = Category.objects.all()
+    queryset = Category.objects.filter(active=True)
     serializer_class = Categoryserializer
     pagination_class = BasePagination
 
 
 # category detail
 class CategoryDetailView(generics.RetrieveAPIView):
-    queryset = Category.objects.all()
+    queryset = Category.objects.filter(active=True)
     serializer_class = Categoryserializer
 
 

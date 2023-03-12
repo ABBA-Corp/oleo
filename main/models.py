@@ -22,6 +22,7 @@ class Category(models.Model):
     icon = ThumbnailerImageField(upload_to='ctg_icons', blank=True, null=True)
     image = ThumbnailerImageField(upload_to='ctg_image', blank=True, null=True)
     cotalog = models.FileField('Cotalog for download', upload_to='cotalog_fiels', blank=True, null=True)
+    active = models.BooleanField(default=True)
 
 
 

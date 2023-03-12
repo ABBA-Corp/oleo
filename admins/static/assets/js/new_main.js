@@ -81,14 +81,14 @@ $('.dropzone').each((i, e) => {
         previewsContainer: `#${$(e).find('.dz-preview-container').attr('id')}`,
         success: (file, response) => {
             var removeButton = Dropzone.createElement(`<a class="dz-remove" data-dz-remove>Удалить</a>`);
-            removeButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
+            removeButton.addEventListener("click", function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
                 myDropzone.removeFile(file);
 
                 data = {}
                 data["csrfmiddlewaretoken"] = $('input[name="csrfmiddlewaretoken"]').val()
-                data['key'] = $('input[name="dropzone-key"]').val()
+                data['key'] = $(e).attr('data-key')
                 data['file'] = response
 
                 $.ajax({

@@ -65,6 +65,10 @@ class BasedCreateView(CreateView):
     image_field = None
     meta = False
 
+    def get(self, request, *args, **kwargs):
+        key = self.model._meta.verbose_name
+        predelete_images(key, request, '')
+
     def get_context_data(self, **kwargs):
         context = super(BasedCreateView, self).get_context_data(**kwargs)
         context['langs'] = Languages.objects.filter(
@@ -150,6 +154,13 @@ class BasedUpdateView(UpdateView):
     fields = '__all__'
     image_field = None
     meta = False
+
+    def get(self, request, *args, **kwargs):
+        key = self.model._meta.verbose_name
+        obj = self.get_object()
+        predelete_images(key, request, obj.id)
+
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BasedUpdateView, self).get_context_data(**kwargs)
@@ -961,6 +972,15 @@ class CategoryCreate(BasedCreateView):
     template_name = 'admin/category_form.html'
     success_url = 'admins:category_list'
 
+    def get(self, request, *args, **kwargs):
+        k = self.model._meta.verbose_name
+        keys = [f'{k}_image', f'{k}_icon']
+
+        for key in keys:
+            predelete_images(key, request, '')
+
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -1014,6 +1034,17 @@ class CategoryEdit(BasedUpdateView):
     fields = '__all__'
     template_name = 'admin/category_form.html'
     success_url = 'admins:category_list'
+
+
+    def get(self, request, *args, **kwargs):
+        k = self.model._meta.verbose_name
+        keys = [f'{k}_image', f'{k}_icon']
+        id = self.get_object().id
+
+        for key in keys:
+            predelete_images(key, request, id)
+
+        return super().get(request, *args, **kwargs)
 
     def get_request_data(self):
         data_dict = super().get_request_data()

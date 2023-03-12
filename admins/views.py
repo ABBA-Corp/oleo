@@ -522,6 +522,7 @@ class StaticUpdate(BasedUpdateView):
     def get_request_data(self):
         data_dict = super().get_request_data()
         cotalog = self.request.FILES.get("cotalog")
+        print(cotalog)
 
         if cotalog:
             data_dict['cotalog'] = cotalog

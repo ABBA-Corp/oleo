@@ -211,3 +211,6 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'Language'
 ]
+
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800

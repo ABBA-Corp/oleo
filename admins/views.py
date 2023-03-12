@@ -64,10 +64,12 @@ class BasedCreateView(CreateView):
     fields = '__all__'
     image_field = None
     meta = False
+    
 
     def get(self, request, *args, **kwargs):
         key = self.model._meta.verbose_name
         predelete_images(key, request, '')
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BasedCreateView, self).get_context_data(**kwargs)

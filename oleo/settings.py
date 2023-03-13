@@ -160,8 +160,8 @@ THUMBNAIL_ALIASES = {
         'btn_img': {'size': (50, 50), 'crop': False},
         'avatar': {'size': (90, 90), 'crop': False},
         'original': {'size': (1300, 1300), 'crop': False},
-        'recipe_img': {'size': (520, 520), 'crop': False},
-        'biiiig': {'size': (600, 600), 'crop': False}
+        'recipe_img': {'size': (800, 800), 'crop': False},
+        'biiiig': {'size': (600, 600), 'crop': False},
     },
 }
 

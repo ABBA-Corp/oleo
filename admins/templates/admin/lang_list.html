@@ -122,14 +122,6 @@
                                         <td>
                                             <div class="d-flex justify-content-end">
                                                 <a href="{% url 'admins:lang_update' lang.id %}" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                <a class="btn btn-sm btn-danger ms-3"
-                                                    onclick="var result = confirm('Want to delete?');if (result){event.preventDefault();document.getElementById('delete-form{{ lang.id }}').submit();}"><i class="fe fe-trash"></i></a>
-                                                <form action="{% url 'admins:lang_del' %}" id="delete-form{{ lang.id }}" method="POST" style="display: none;">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="id" value="{{ lang.id }}">
-                                                    <input type="hidden" name="url" value="{{ request.get_full_path }}">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                </form>
                                             </div>
                                         </td>
                                     </tr>

@@ -31,7 +31,8 @@ class BasedListView(ListView):
 
         end_set = set()
         for field in fields:
-            qs = queryset.extra(where=[f'LOWER({field}) LIKE %s'], params=[f'%{query.lower()}%'])
+            qs = queryset.extra(where=[f'LOWER({field} ::varchar) LIKE %s'], params=[
+                                f'%{query.lower()}%'])
             for item in qs:
                 end_set.add(item)
 

@@ -100,7 +100,7 @@
                         </td>
                         {% for val in item.values %}
                         <td>
-                            <input type="text" name="{{ val.key }}" class="form-control" placeholder="{{ lang.code }}..." value="{{ val.value }}" required>
+                            <input type="text" name="{{ val.key }}" class="form-control" placeholder="{{ lang.code }}..." value="{{ val.value }}" {% if val.lng == val.def_lang %} required {% endif %}>
                             <div class="invalid-feedback" style="display: block;">
                                 {% if lng_errors and lng_errors|get_item:i and val.lng == val.def_lang %}
                                     <p>{{ lng_errors|get_item:i }}</p>
@@ -110,8 +110,6 @@
                         {% endfor %}
                     </tr>
                 {% endfor %}
-
-                {{ lng_errors }}
             </tbody>
         </table>
         <button id="add_item" type="button" class="btn btn-info w-100 my-4">Добавить еще</button>

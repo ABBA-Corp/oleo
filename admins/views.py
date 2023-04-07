@@ -704,56 +704,72 @@ class TranslationGroupUdpate(UpdateView):
         for l in range(1, int(items_count) + 1):
             new_data = {}
             new_data['id'] = l
-            new_data['key'] = request.POST[f'key[{l}]']
+            new_data['key'] = request.POST.get(f'key[{l}]', '')
             new_data['values'] = []
             for lng in langs:
                 new_data['values'].append(
-                    {'key': f'value[{l}][{lng.code}]', 'value': request.POST[f'value[{l}][{lng.code}]'], 'def_lang': lang.code, 'lng': lng.code})
+                    {'key': f'value[{l}][{lng.code}]', 'value': request.POST.get(f'value[{l}][{lng.code}]', ''), 'def_lang': lang.code, 'lng': lng.code})
 
             data.append(new_data)
 
         objects = dict(pairs=zip(data, list(range(1, int(items_count) + 1))))
 
+        context_data = {
+            'new_objects': objects,
+            'langs': langs,
+            'len': int(items_count) + 1,
+            'object': self.get_object()
+        }
+
         for i in range(len(transls)):
             transls[i].key = request.POST.get(f'key[{i + 1}]', '')
 
             if transls[i].key == '':
-                return render(request, template_name=self.template_name, context={'key_errors': {str(i+1): 'Key is required'},  'new_objects': objects, 'langs': langs, 'len': int(items_count) + 1})
+                context_data['key_errors'] = {str(i+1): 'Key is required'}
+                return render(request, template_name=self.template_name, context=context_data)
 
             in_default_lng = request.POST.get(f'value[{i+1}][{lang.code}]', '')
 
             if in_default_lng == '':
-                return render(request, template_name=self.template_name, context={'lng_errors': {str(i+1): 'This language is required'}, 'new_objects': objects, 'langs': langs, 'len': int(items_count) + 1})
+                context_data['lng_errors'] = {
+                    str(i+1): 'This language is required'}
+                return render(request, template_name=self.template_name, context=context_data)
 
             value_dict = {}
-            for lang in langs:
-                value_dict[str(lang.code)
-                           ] = request.POST[f'value[{i + 1}][{lang.code}]']
+            for lng in langs:
+                value_dict[str(lng.code)
+                           ] = request.POST[f'value[{i + 1}][{lng.code}]']
 
             transls[i].value = value_dict
             try:
                 transls[i].full_clean()
                 transls[i].save()
             except:
-                return render(request, template_name=self.template_name, context={'key_errors': {str(i): 'Key is alredy in use'},  'new_objects': objects, 'langs': langs, 'len': items_count})
+                context_data['key_errors'] = {str(i): 'Key is alredy in use'}
+                return render(request, template_name=self.template_name, context=context_data)
 
         for i in range(len(transls) + 1, int(items_count) + 1):
             new_trans = Translations()
             data = {}
             new_trans.key = request.POST.get(f'key[{i}]', '')
 
+            context_data['len'] = items_count
+
             if new_trans.key == '':
-                return render(request, template_name=self.template_name, context={'key_errors': {str(i): 'Key is required'},  'new_objects': objects, 'langs': langs, 'len': items_count})
+                context_data['key_errors'] = {str(i): 'Key is required'}
+                return render(request, template_name=self.template_name, context=context_data)
 
             value_dict = {}
             in_default_lng = request.POST.get(f'value[{i}][{lang.code}]', '')
 
             if in_default_lng == '':
-                return render(request, template_name=self.template_name, context={'lng_errors': {str(i): 'This language is required'}, 'new_objects': objects, 'langs': langs, 'len': items_count})
+                context_data['lng_errors'] = {
+                    str(i): 'This language is required'}
+                return render(request, template_name=self.template_name, context=context_data)
 
-            for lang in langs:
-                value_dict[str(lang.code)
-                           ] = request.POST[f'value[{i}][{lang.code}]']
+            for lng in langs:
+                value_dict[str(lng.code)
+                           ] = request.POST[f'value[{i}][{lng.code}]']
 
             new_trans.value = value_dict
             new_trans.group = self.get_object()
@@ -762,7 +778,8 @@ class TranslationGroupUdpate(UpdateView):
                 new_trans.full_clean()
                 new_trans.save()
             except:
-                return render(request, template_name=self.template_name, context={'key_errors': {str(i): 'Key is alredy in use'}, 'new_objects': objects, 'langs': langs, 'len': items_count})
+                context_data['key_errors'] = {str(i): 'Key is alredy in use'}
+                return render(request, template_name=self.template_name, context=context_data)
 
         return redirect('admins:transl_group_detail', pk=self.get_object().id)
 
